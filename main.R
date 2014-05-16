@@ -6,3 +6,9 @@ plot(mtcars$wt,mtcars$mpg);
 v1 <- c(1,2,3);
 v2 <- c(4,5,6);
 c(v1,v2);
+
+Sys.Date()
+
+choose(5,3)
+
+combn(1:5,3)
