@@ -18,5 +18,10 @@ region.y <- y[1 <= x & x <= 2]
 polygon(region.x, region.y, density=-1, col="red")
 
 
+barplot(c(3,5,4), col=c("red","white","blue"))
+rel.hts <- rank(heights) / length(heights)
+grays <- gray(1 - rel.hts)
+
+barplot(heights, col=grays)
 
 
