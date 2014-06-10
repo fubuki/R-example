@@ -14,3 +14,40 @@ qc <- 0         # plot instantaneous q size
 tc <- 0         # plot time delta
 plotSamples <- 100
 set.seed(1)
+
+
+
+while (t.clock < t.end) {
+    if (t1 < t2) {      # arrival event
+        t.clock <- t1
+        s <- s + n * (t.clock - tn)  # delta time-weighted number in queue
+        n <- n + 1
+        if (t.clock < plotSamples) { 
+            qc <- append(qc,n)
+            tc <- append(tc,t.clock) 
+        }
+        tn <- t.clock
+        t1 <- t.clock + rexp(1, 1/Ta)
+        if(n == 1) { 
+            tb <- t.clock
+            t2 <- t.clock + rexp(1, 1/Ts)  # exponential  interarrival period
+        }
+    } else {            # departure event
+        t.clock <- t2
+        s <- s + n * (t.clock - tn)  # delta time-weighted number in queue
+        n <- n - 1
+        if (t.clock < plotSamples) { 
+            qc <- append(qc,n)
+            tc <- append(tc,t.clock)
+        }
+        tn <- t.clock
+        c <- c + 1
+        if (n > 0) { 
+            t2 <- t.clock + rexp(1, 1/Ts)  # exponential  service period
+        }
+        else { 
+            t2 <- t.end
+            b <- b + t.clock - tb
+        }
+    }   
+}
